@@ -1,0 +1,94 @@
+/* Nuevo look: violeta + menta, botones tipo pastilla con relieve, pestañas segmentadas.
+   Solo cambia la apariencia; los nombres de clases e ids que usa el JavaScript se mantienen. */
+:root{
+  --bg:#f6f3fc;--panel:#ffffff;--ink:#241d45;--mute:#6b6590;--line:#e6e1f4;
+  --acc:#6d4aff;--acc-dk:#4b2fd0;--acc-soft:#efeaff;--head:#2b1f63;
+  --warn:#8a5a00;--warnbg:#fff3d1;--err:#a3243f;--errbg:#ffe4ea;--ok:#13703f;--okbg:#ddf6e8;--vig:#e4f7ee;
+  --r:16px;--sombra:0 1px 2px rgba(43,31,99,.06),0 10px 28px -14px rgba(43,31,99,.22)
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 "Nunito","Segoe UI",system-ui,sans-serif}
+
+/* Encabezado */
+.top{background:var(--head);color:#fff;padding:20px 24px 34px;display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;justify-content:space-between;border-radius:0 0 28px 28px}
+h1{font:800 21px/1.2 inherit;font-family:inherit;margin:0;letter-spacing:-.01em}
+h2{font:800 17px/1.3 inherit;font-family:inherit;margin:0 0 14px}
+.ctx{display:flex;flex-wrap:wrap;gap:12px}
+.ctx label{color:#d9d0ff;font-size:12.5px;font-weight:700;display:flex;flex-direction:column;gap:4px;margin:0}
+.ctx select{min-width:210px;border:0;border-radius:12px;padding:9px 12px}
+
+/* Pestañas: control segmentado en pastillas */
+.tabs{display:flex;gap:6px;max-width:1180px;margin:-20px auto 0;padding:0 24px;overflow-x:auto}
+.tabs button{background:#fff;border:1.5px solid var(--line);color:var(--mute);padding:9px 18px;border-radius:999px;font-weight:700;white-space:nowrap;box-shadow:var(--sombra);transition:background .15s,color .15s,transform .1s}
+.tabs button:hover{color:var(--acc);border-color:#cfc4ff}
+.tabs button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+
+main,.aviso{max-width:1180px;margin:0 auto;padding:0 24px}
+main{padding-bottom:48px}
+.aviso{margin-top:16px;padding:12px 20px;border-radius:14px;font-weight:600}
+.aviso.err{background:var(--errbg);color:var(--err)}.aviso.ok{background:var(--okbg);color:var(--ok)}.aviso.warn{background:var(--warnbg);color:var(--warn)}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:16px}
+@media(max-width:820px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--panel);border-radius:var(--r);padding:22px;margin-top:16px;box-shadow:var(--sombra)}
+
+/* Campos */
+label{display:flex;flex-direction:column;gap:5px;font-size:13px;font-weight:700;color:var(--mute);margin-bottom:12px}
+input,select{font:inherit;font-weight:500;color:var(--ink);padding:9px 12px;border:1.5px solid #d9d2f0;border-radius:12px;background:#fff;transition:border-color .15s,box-shadow .15s}
+input:hover,select:hover{border-color:#b9acf0}
+input:focus,select:focus{outline:0;border-color:var(--acc);box-shadow:0 0 0 4px rgba(109,74,255,.18)}
+input[type=checkbox]{width:20px;height:20px;padding:0;accent-color:var(--acc);cursor:pointer}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.row3{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end}
+.row3 button{margin-bottom:12px}
+.row5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+@media(max-width:700px){.row2,.row3,.row5{grid-template-columns:1fr}}
+.chk{flex-direction:row;align-items:center;gap:10px;background:var(--acc-soft);padding:10px 14px;border-radius:12px;color:var(--ink);font-weight:600;cursor:pointer}
+
+/* Botones: pastilla con relieve que se hunde al presionar */
+button{font:inherit;font-weight:700;padding:9px 18px;border:1.5px solid #d9d2f0;border-radius:999px;background:#fff;color:var(--ink);cursor:pointer;transition:transform .1s,box-shadow .1s,background .15s}
+button:hover{background:var(--acc-soft)}
+button:focus-visible{outline:3px solid rgba(109,74,255,.45);outline-offset:2px}
+button.primary{background:var(--acc);border-color:var(--acc);color:#fff;padding:11px 24px;box-shadow:0 4px 0 var(--acc-dk)}
+button.primary:hover:not(:disabled){background:#7a5bff;transform:translateY(-1px);box-shadow:0 5px 0 var(--acc-dk)}
+button.primary:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 var(--acc-dk)}
+button.primary:disabled{background:#cfc9e6;border-color:#cfc9e6;box-shadow:0 4px 0 #b8b1d6;color:#fff;cursor:not-allowed}
+button.small{padding:5px 14px;font-size:13px;background:var(--acc-soft);border-color:transparent;color:var(--acc-dk)}
+button.small:hover{background:var(--acc);color:#fff}
+form > button.primary{width:100%;margin-top:6px}
+
+/* Tablas */
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:separate;border-spacing:0;font-variant-numeric:tabular-nums}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+th{font-size:12.5px;color:var(--mute);font-weight:800;background:#f8f6fe}
+th:first-child{border-radius:10px 0 0 10px}th:last-child{border-radius:0 10px 10px 0}
+tbody tr:hover td{background:#faf8ff}
+.n{text-align:right}
+tr.vig td,tr.vig:hover td{background:var(--vig);font-weight:700}
+.tag{font-size:12px;font-weight:700;padding:2px 10px;border-radius:999px;background:#ece8f7;color:var(--mute)}
+.tag.fact{background:var(--warnbg);color:var(--warn)}
+
+/* Detalle y totales */
+dl{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;margin:0}
+dt{color:var(--mute)}dd{margin:0;text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+.total{margin-top:14px;padding:14px 16px;background:var(--acc-soft);border-radius:14px;display:flex;justify-content:space-between;align-items:baseline;font-weight:700}
+.total b{font:800 28px/1.1 inherit;font-family:inherit;color:var(--acc-dk)}
+.resumen{display:flex;flex-wrap:wrap;gap:12px 36px;margin-bottom:14px}
+.resumen div span{display:block;font-size:13px;color:var(--mute);font-weight:600}
+.resumen div b{font:800 22px/1.3 inherit;font-family:inherit}
+.vacio,.nota{color:var(--mute);margin:0}
+.nota{margin-bottom:12px}
+.mini{margin-top:10px;padding:10px 14px;border-radius:12px;font-size:14px;font-weight:600}
+.mini.warn{background:var(--warnbg);color:var(--warn)}.mini.err{background:var(--errbg);color:var(--err)}
+
+/* Ventana de confirmación */
+dialog{border:0;border-radius:22px;padding:24px;max-width:440px;width:92%;box-shadow:0 24px 60px -12px rgba(43,31,99,.45);color:var(--ink)}
+dialog::backdrop{background:rgba(36,29,69,.5);backdrop-filter:blur(3px)}
+dialog h3{margin:0 0 12px;font:800 18px/1.3 inherit;font-family:inherit}
+.acciones{display:flex;justify-content:flex-end;gap:10px;margin-top:20px}
+@media(prefers-reduced-motion:no-preference){
+  .aviso{transition:opacity .2s}
+  dialog[open]{animation:entra .18s ease-out}
+  @keyframes entra{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
+}
+@media(prefers-reduced-motion:reduce){button,input,select{transition:none}}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Impuesto a las Actividades Económicas</title>
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+<header class="top">
+  <h1>🧾 Impuesto a las Actividades Económicas</h1>
+  <div class="ctx">
+    <label>Usuario <select id="usuario"></select></label>
+    <label>Cliente <select id="cliente"></select></label>
+    <label>Producto <select id="producto"></select></label>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button data-tab="periodos" class="on">🗓️ Períodos</button>
+  <button data-tab="cobro">💵 Cobro</button>
+  <button data-tab="tarifas">🏷️ Tarifas</button>
+  <button data-tab="bitacora">📋 Bitácora</button>
+</nav>
+
+<div id="aviso" class="aviso" role="alert" hidden></div>
+
+<main>
+<section id="tab-periodos">
+  <div class="grid">
+    <form id="form" class="panel" autocomplete="off">
+      <h2>Nuevo período</h2>
+      <div class="row2">
+        <label>Desde (incluida) <input type="date" id="desde" required></label>
+        <label>Hasta (no incluida) <input type="date" id="hasta" required></label>
+      </div>
+      <div class="row2">
+        <label>Monto o activo (USD) <input type="text" inputmode="decimal" id="balance" placeholder="550.00"></label>
+        <label>Cantidad <input type="text" inputmode="decimal" id="cantidad" value="1.00"></label>
+      </div>
+      <label class="chk"><input type="checkbox" id="cerrar"> Si el balance cambió, cerrar el período vigente en la fecha Desde</label>
+      <button type="submit" class="primary" id="guardar" disabled>💾 Guardar período</button>
+    </form>
+
+    <div class="panel" id="detalle">
+      <h2>Detalle del cálculo</h2>
+      <p class="vacio">Ingrese cliente, producto, fechas y balance para ver el cálculo.</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="resumen" id="resumen"></div>
+    <div class="scroll">
+      <table id="tabla-periodos">
+        <thead><tr><th>Desde</th><th>Hasta</th><th class="n">Balance</th><th>Código</th><th class="n">Precio mensual</th><th>Fórmula</th><th>Estado</th><th></th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="tab-cobro" hidden>
+  <div class="panel">
+    <h2>Calcular cobro</h2>
+    <p class="nota">Cargo = Cantidad × Precio mensual × Meses aplicables. Solo participan los períodos que se superponen con el rango.</p>
+    <div class="row3">
+      <label>Desde <input type="date" id="c-desde"></label>
+      <label>Hasta <input type="date" id="c-hasta"></label>
+      <button class="primary" id="c-calc" type="button">🧮 Calcular cobro</button>
+    </div>
+    <div id="c-res"></div>
+  </div>
+  <div class="panel"><h2>Recibos generados</h2><div class="scroll"><table id="tabla-recibos"><thead><tr><th>Recibo</th><th>Cliente</th><th>Código</th><th>Desde</th><th>Hasta</th><th class="n">Total</th><th>Usuario</th></tr></thead><tbody></tbody></table></div></div>
+</section>
+
+<section id="tab-tarifas" hidden>
+  <div class="panel">
+    <h2>Tabla tarifaria</h2>
+    <div id="t-huecos"></div>
+    <div class="scroll"><table id="tabla-tarifas"><thead><tr><th>Versión</th><th class="n">Desde</th><th class="n">Hasta</th><th class="n">Precio base</th><th class="n">Adicional</th><th class="n">%</th><th>Vigente desde</th></tr></thead><tbody></tbody></table></div>
+  </div>
+  <form class="panel" id="form-tarifa" autocomplete="off">
+    <h2>Agregar tarifa al producto seleccionado</h2>
+    <div class="row5">
+      <label>Desde <input id="t-desde"></label><label>Hasta <input id="t-hasta"></label>
+      <label>Precio base <input id="t-base" value="0"></label><label>Adicional <input id="t-adic" value="0"></label>
+      <label>% <input id="t-pct" value="0"></label>
+    </div>
+    <div class="row3"><label>Vigente desde <input type="date" id="t-vig"></label><span></span><button class="primary" type="submit">➕ Agregar tarifa</button></div>
+  </form>
+</section>
+
+<section id="tab-bitacora" hidden>
+  <div class="panel"><h2>Bitácora (últimos 100 eventos)</h2><div class="scroll"><table id="tabla-bitacora"><thead><tr><th>Fecha</th><th>Usuario</th><th>Acción</th><th>Período</th><th>Detalle</th></tr></thead><tbody></tbody></table></div></div>
+</section>
+</main>
+
+<dialog id="dlg">
+  <form method="dialog">
+    <h3 id="dlg-t">Confirmar</h3>
+    <div id="dlg-b"></div>
+    <div class="acciones"><button value="no">Cancelar</button><button value="si" class="primary" id="dlg-ok">Confirmar</button></div>
+  </form>
+</dialog>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

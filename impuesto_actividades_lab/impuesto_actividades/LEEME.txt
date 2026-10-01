@@ -1,0 +1,27 @@
+IMPUESTO A LAS ACTIVIDADES ECONOMICAS
+HTML + CSS + JavaScript (sin frameworks) + Python 3.13 (libreria estandar + pymysql)
+
+ESTRUCTURA
+  main.py                  -> arranca el servidor
+  backend/conexion.py      -> CONEXION A MARIADB (host, puerto 3306, usuario, clave, base)
+  backend/servidor.py      -> servidor web (http.server)
+  backend/rutas.py         -> direcciones de la API
+  backend/periodos.py      -> validar, calcular, guardar y cerrar periodos
+  backend/tarifas.py       -> buscar tarifa y formula del impuesto
+  backend/cobro.py         -> cobro y recibos
+  backend/bitacora.py      -> auditoria
+  backend/utilidades.py    -> decimales y fechas
+  backend/errores.py       -> error con mensaje para el usuario
+  static/index.html        -> pantalla (HTML)
+  static/css/estilos.css   -> estilos (CSS)
+  static/js/*.js           -> JavaScript: main, periodos, cobro, tarifas, bitacora, api, util, contexto
+  base_de_datos.sql        -> base completa (se pega en la consola de XAMPP)
+  iniciar.bat              -> instala pymysql y arranca (Windows)
+
+PASOS (en Windows puede usar iniciar.bat en lugar de los pasos 3 y 4)
+1) XAMPP: iniciar MySQL (puerto 3306).
+2) Shell de XAMPP:  mysql -u root -p   (Enter si no hay clave) y pegar TODO base_de_datos.sql
+   (o:  mysql -u root < base_de_datos.sql)
+3) pip install pymysql
+4) python main.py
+5) Abrir http://127.0.0.1:8000
